@@ -6,3 +6,30 @@
 .center {
   text-align: center;
 }
+
+.navContainer {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navbtn {
+  padding: 3px;
+  font-size: 1.2em;
+  margin: 5px;
+}
+
+.gameList {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: fit-content;
+  list-style: none;
+}
+
+.gameItem {
+  padding: 4px;
+  margin: 4px;
+  border: 1px solid black;
+}
