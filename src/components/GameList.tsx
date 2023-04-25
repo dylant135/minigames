@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Link } from 'react-router-dom'
 
 export default function GameList() {
+    //enter new games here
+    const list = useRef<string[]>(['numbermemory'])
+
+    const displayList = list.current.map(l => {
+        return (
+            <Link to={'/game/' + l}><button className="gameItem" type="button">{l}</button></Link>
+        )
+    })
     return (
         <ul className="gameList">
             <li><strong>Game List</strong></li>
             <hr></hr>
-            <Link to=''><li className="gameItem">Game 1</li></Link>
-            <li className="gameItem">Game 2</li>
-            <li className="gameItem">Game 3</li>
-            <li className="gameItem">Game 4</li>
+            {displayList}
         </ul>
     )
 }
