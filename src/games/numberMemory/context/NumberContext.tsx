@@ -1,7 +1,12 @@
 import React, {createContext, useState} from "react";
 import { childProps } from "./RoundContext";
 
-const numberContext = createContext({})
+const initContext = {
+    number: 0,
+    setNumber: (number: number) => {}
+}
+
+const numberContext = createContext(initContext)
 
 export function NumberContextProvider({ children }: childProps) {
 

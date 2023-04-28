@@ -7,7 +7,7 @@ export default function GameList() {
 
     const displayList = list.current.map(l => {
         return (
-            <Link to={'/game/' + l}><button className="gameItem" type="button">{l}</button></Link>
+            <Link to={'/game/' + l} key={l}><button className="gameItem" type="button">{l}</button></Link>
         )
     })
     return (

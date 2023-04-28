@@ -2,12 +2,15 @@ import React, { createContext, useState } from "react";
 
 type rcType = {
     roundNum: number,
-    setRoundNumber: React.Dispatch<React.SetStateAction<number>>,
-    mode: string,
-    setMode: React.Dispatch<React.SetStateAction<string>>
+    setRoundNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
-const RoundContext = createContext<{rcType} || {}>({})
+const context = {
+    roundNum: 0,
+    setRoundNumber: () => {}
+} as rcType
+
+const RoundContext = createContext(context)
 
 
 export type childProps = {
@@ -17,15 +20,12 @@ export type childProps = {
 export function RoundContextProvider({ children }: childProps) {
 
     const [roundNum, setRoundNum] = useState(0)
-    const [mode, setMode] = useState('start')
 
     return (
         <RoundContext.Provider value={
             {
                 roundNum: roundNum,
-                setRoundNum: setRoundNum,
-                mode: mode,
-                setMode: setMode
+                setRoundNumber: setRoundNum
             }
         }>
             {children}
