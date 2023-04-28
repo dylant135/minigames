@@ -34,3 +34,9 @@
   border: 1px solid black;
   font-size: 1.3em;
 }
+
+.numberMemory {
+  width: 100vw;
+  margin: auto;
+  text-align: center;
+}
