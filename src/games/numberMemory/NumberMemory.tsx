@@ -26,7 +26,7 @@ export default function NumberMemory() {
                     <NumberContextProvider>
                         {stage === 'display' && <DisplayNum setStage={setStage} />}
                         {stage === 'guess' && <Guess setStage={setStage} guess={guess} setGuess={setGuess} />}
-                        {stage === 'check' && <Check />}
+                        {stage === 'check' && <Check guess={guess} setMode={setMode} setStage={setStage} />}
                     </NumberContextProvider>
                 </div>}
 
