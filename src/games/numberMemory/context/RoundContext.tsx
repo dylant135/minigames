@@ -6,7 +6,7 @@ type rcType = {
 }
 
 const context = {
-    roundNum: 0,
+    roundNum: 1,
     setRoundNumber: () => {}
 } as rcType
 
@@ -19,7 +19,7 @@ export type childProps = {
 
 export function RoundContextProvider({ children }: childProps) {
 
-    const [roundNum, setRoundNum] = useState(0)
+    const [roundNum, setRoundNum] = useState(1)
 
     return (
         <RoundContext.Provider value={

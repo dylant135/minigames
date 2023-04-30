@@ -1,38 +1,38 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import numberContext from "../context/NumberContext";
 import RoundContext from "../context/RoundContext";
 
 type checkProps = {
     guess: number,
     setMode: React.Dispatch<React.SetStateAction<string>>,
-    setStage: React.Dispatch<React.SetStateAction<string>>
+    setStage: React.Dispatch<React.SetStateAction<string>>,
+    setGuess: React.Dispatch<React.SetStateAction<number>>,
+    stage: string
 }
 
-export default function Check({ guess, setMode, setStage}: checkProps) {
-    const { number } = useContext(numberContext)
+export default function Check({ guess, setMode, setStage, setGuess, stage}: checkProps) {
+    const { number, setIsNumSet } = useContext(numberContext)
     const { setRoundNumber } = useContext(RoundContext)
-    const [isCorrect, setIsCorrect] = useState('')
+    const [didCheck, setDidCheck] = useState(false)
 
     //check guess
-    useEffect(() => {
-        if(number === guess) {
-            setIsCorrect('correct')
-        } else {
-            setIsCorrect('wrong')
-        }
-    }, [guess, number])
 
-    //handle correct or wrong
-    useEffect(() => {
-        if(isCorrect === 'correct') {
-            setRoundNumber(prevState => prevState++)
-            setStage('display')
-        } else if(isCorrect === 'wrong') {
+    while(didCheck === false && guess !== 0 && stage === 'check') {
+        if(number === guess) {
+            setGuess(0)
+            setRoundNumber(prevState =>{
+                return prevState + 1
+            })
+            setIsNumSet(false)
+            setStage('display') 
+        } else {
             setMode('end')
         }
-        setIsCorrect('')
-    }, [isCorrect])
+        console.log(guess)
+        setDidCheck(true)
+    }
 
+    
     return (
         <div className="check">
 
