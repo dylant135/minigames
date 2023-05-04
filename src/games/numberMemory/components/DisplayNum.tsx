@@ -7,17 +7,17 @@ type displayProps = {
 }
 
 export default function DisplayNum({ setStage } : displayProps) {
-
     const { roundNum, setRoundNumber} = useContext(RoundContext)
-    const { number, setNumber, isNumSet, setIsNumSet} = useContext(numberContext)
+    const { number, setNumber} = useContext(numberContext)
+
 
     //generate number
     useEffect(() => {
-        console.log(roundNum)
-        if(isNumSet) {
+        if(number !== 0) {
             return
         }
-        //set number
+        console.log(roundNum)
+
         let num:number[] | string | number = [];
         for(let i = 0; i < roundNum; i++) {
             let ranNum = Math.floor((Math.random() * 10) + 1)
@@ -29,22 +29,19 @@ export default function DisplayNum({ setStage } : displayProps) {
         const unArr = num.join('')
         const n = parseInt(unArr)
         setNumber(n)
-        setIsNumSet(true)
-    }, [isNumSet, number, roundNum, setIsNumSet, setNumber, setRoundNumber])
+    }, [number, roundNum, setNumber, setRoundNumber])
 
     //display number
     useEffect(() => {
         if(number.toString().length !== roundNum) {
             return
         }
-        if(!isNumSet) {
-            return
-        }
+        
         const time = roundNum * 1000
         setTimeout(() => {
             setStage('guess')
         }, 2000 + time)
-    }, [isNumSet, number, roundNum, setStage])
+    }, [number, roundNum, setStage])
 
     return (
         <div className="displayNum">

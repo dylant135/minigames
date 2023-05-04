@@ -5,15 +5,21 @@ const initContext = {
     number: 0,
     setNumber: (number: number) => {},
     isNumSet: false,
-    setIsNumSet: (boolean: boolean) => {}
+    setIsNumSet: (boolean: boolean) => {},
+    guess: 0,
+    setGuess: (number: number) => {}
 }
 
 const numberContext = createContext(initContext)
 
 export function NumberContextProvider({ children }: childProps) {
 
+    //generated number
     const [number, setNumber] = useState(0)
     const [isNumSet, setIsNumSet] = useState(false)
+
+    //guessed number
+    const [guess, setGuess] = useState(0)
 
     return (
         <numberContext.Provider value={
@@ -21,7 +27,9 @@ export function NumberContextProvider({ children }: childProps) {
                 number,
                 setNumber,
                 isNumSet,
-                setIsNumSet
+                setIsNumSet,
+                guess,
+                setGuess
             }
         }>
             {children}

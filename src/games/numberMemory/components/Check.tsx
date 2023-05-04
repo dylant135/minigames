@@ -1,41 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import numberContext from "../context/NumberContext";
 import RoundContext from "../context/RoundContext";
 
 type checkProps = {
-    guess: number,
     setMode: React.Dispatch<React.SetStateAction<string>>,
     setStage: React.Dispatch<React.SetStateAction<string>>,
-    setGuess: React.Dispatch<React.SetStateAction<number>>,
     stage: string
 }
 
-export default function Check({ guess, setMode, setStage, setGuess, stage}: checkProps) {
-    const { number, setIsNumSet } = useContext(numberContext)
+export default function Check({ setMode, setStage, stage}: checkProps) {
+    const { number, setNumber, setGuess, guess } = useContext(numberContext)
     const { setRoundNumber } = useContext(RoundContext)
-    const [didCheck, setDidCheck] = useState(false)
+
+    const [isCorrect, setIsCorrect] = useState<boolean>()
+
+    useEffect(() => {
+        checkGuess()
+    }, [])
 
     //check guess
-
-    while(didCheck === false && guess !== 0 && stage === 'check') {
+    function checkGuess() {
         if(number === guess) {
-            setGuess(0)
-            setRoundNumber(prevState =>{
-                return prevState + 1
-            })
-            setIsNumSet(false)
-            setStage('display') 
+            setIsCorrect(true)
         } else {
-            setMode('end')
+            setIsCorrect(false)
         }
-        console.log(guess)
-        setDidCheck(true)
     }
 
+    function nextRound() {
+        setIsCorrect(undefined)
+        setGuess(0)
+        setNumber(0)
+        setRoundNumber(prevState => {
+            return prevState + 1
+        })
+        setStage('display')
+    }
     
     return (
         <div className="check">
+            {isCorrect && 
+            <div>
+                <h2 className="center">Correct!</h2>
+                <button onClick={nextRound}>Next Round</button>
+            </div>}
 
+            {isCorrect === false && 
+            <div>
+                <h2>Wrong</h2>
+            </div>}
         </div>
     )
 }

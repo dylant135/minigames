@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import numberContext from "../context/NumberContext";
 
 type GuessProps = {
     setStage: React.Dispatch<React.SetStateAction<string>>,
-    guess: number,
-    setGuess: React.Dispatch<React.SetStateAction<number>>
 }
 
-export default function Guess({ setStage, guess, setGuess }: GuessProps) {
+export default function Guess({ setStage }: GuessProps) {
+    const  { setGuess} = useContext(numberContext)
+
+    const [formData, setFormData] = useState(0)
 
     function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         let t = e.target
-        setGuess(parseInt(t.value))
+        setFormData(parseInt(t.value))
     }
 
     function handleSubmit(e : React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        setGuess(formData)
         setStage('check')
     }
 
@@ -24,9 +27,9 @@ export default function Guess({ setStage, guess, setGuess }: GuessProps) {
             <form onSubmit={handleSubmit}>
                 <input
                     type='number'
-                    value={guess}
+                    value={formData}
                     onChange={handleChange}
-                    placeholder='Guess'
+                    placeholder='Number'
                 />
                 <button>Submit Guess</button>
             </form>
