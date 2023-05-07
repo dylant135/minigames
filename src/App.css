@@ -7,6 +7,10 @@
   text-align: center;
 }
 
+nav {
+  background-color: crimson;
+}
+
 .navContainer {
   width: fit-content;
   display: flex;
@@ -36,6 +40,28 @@
 }
 
 .numberMemory {
+  width:100vw;
+  margin: auto;
+  text-align: center;
+}
+
+.incorrect {
+  margin-top: 25px;
+}
+
+.gamebtn {
+  font-size: 1.3em;
+  padding: 4px;
+  margin: 3px;
+
+}
+
+.guessInput {
+  font-size: 1.3em;
+  padding: 4px;
+}
+
+.reactionTest {
   width: 100vw;
   margin: auto;
   text-align: center;
