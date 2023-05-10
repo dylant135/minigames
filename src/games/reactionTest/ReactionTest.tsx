@@ -38,7 +38,7 @@ export default function ReactionTest() {
         setMode('roundResults')
     }
 
-    function nextGame() {
+    function nextRound() {
         setPress(false)
         setRoundNum(prevState => prevState + 1)
         startGame()
@@ -51,7 +51,7 @@ export default function ReactionTest() {
     return (
         <div className="reactionTest">
                 <h2 className="center">Reaction Test</h2>
-                {mode === 'start' && <button className="gamebtn" onClick={startGame}>Start Game</button>}
+                {mode === 'start' && <button className="startbtn" onClick={startGame}>Start Game</button>}
 
                 {mode === 'game' && <div>
                     <h3>Round {roundNum}/5</h3>
@@ -61,9 +61,9 @@ export default function ReactionTest() {
                     </div>}
 
                     {mode === 'roundResults' && <div className="roundResults">
-                            <h3 className="center">{scores[roundNum - 1]}</h3>
-                            {roundNum < 5 && <button onClick={nextGame}>Next Round</button>}
-                            {roundNum === 5 && <button onClick={results}>Results</button>}
+                            <h3 className="center mDown">{scores[roundNum - 1]}ms</h3>
+                            {roundNum < 5 && <button className="nextRound" onClick={nextRound}>Next Round</button>}
+                            {roundNum === 5 && <button className="nextRound" onClick={results}>Results</button>}
                     </div>}
 
                 {mode === 'end' && <div>

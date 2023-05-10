@@ -12,7 +12,7 @@ export default function GameList() {
     })
     return (
         <ul className="gameList">
-            <li><strong>Game List</strong></li>
+            <li className="center listTitle"><strong>Game List</strong></li>
             <hr></hr>
             {displayList}
         </ul>

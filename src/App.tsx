@@ -10,7 +10,6 @@ import ReactionTest from './games/reactionTest/ReactionTest';
 function App() {
   return (
     <div className="App">
-      <h1 className='center'>MiniGames</h1>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

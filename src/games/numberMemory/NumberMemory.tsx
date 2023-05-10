@@ -21,7 +21,7 @@ export default function NumberMemory() {
                 <h2 className="center">Number Memory</h2>
                 <h3>Score: {score}</h3>
 
-                {mode === 'start' && <button className="gamebtn" onClick={startGame}>Start</button>}
+                {mode === 'start' && <button className="startbtn" onClick={startGame}>Start</button>}
 
                 {mode === 'game' && <div className="numberGame">
                     <NumberContextProvider>

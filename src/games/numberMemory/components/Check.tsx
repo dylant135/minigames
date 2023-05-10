@@ -51,7 +51,7 @@ export default function Check({ setMode, setStage, stage, setScore}: checkProps)
             {isCorrect && 
             <div>
                 <h2 className="center">Correct!</h2>
-                <button onClick={nextRound} className='gamebtn'>Next Round</button>
+                <button onClick={nextRound} className='nextRound'>Next Round</button>
             </div>}
 
             {isCorrect === false && 
@@ -59,7 +59,7 @@ export default function Check({ setMode, setStage, stage, setScore}: checkProps)
                 <h2>Wrong</h2>
                 <h3>The Number: {number}</h3>
                 <h3>Guess: {guess}</h3>
-                <button onClick={newGame} className='gamebtn'>New Game</button>
+                <button onClick={newGame} className='nextRound'>New Game</button>
             </div>}
         </div>
     )
