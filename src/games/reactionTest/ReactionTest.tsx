@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ReactionTest() {
     const [roundNum, setRoundNum] = useState(1)
@@ -6,12 +6,23 @@ export default function ReactionTest() {
     const [press, setPress] = useState(false)
     const [startTime, setStartTime] = useState(0)
     const [scores, setScores] = useState<number[]>([])
+    const [isEarly, setIsEarly] = useState(0)
 
+    useEffect(() => {
+        if(mode !== 'game') return
+        const randomTime = Math.random() * (4000 - 1500) + 1500
+        const timeout = setTimeout(() => {
+            changebtn()
+        }, randomTime)
+        
+        return function () {
+            clearTimeout(timeout)
+        }
+    }, [mode, startGame])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     function startGame() {
         setMode('game')
-        setTimeout(() => {
-            changebtn()
-        }, 2000)
     }
 
 
@@ -22,7 +33,13 @@ export default function ReactionTest() {
     }
 
     function early() {
-
+        if(isEarly === 1) {
+            loseGame()
+            return
+        }
+        setIsEarly(1)
+        setMode('start')
+        setPress(false)
     }
 
     function handleClick() {
@@ -48,10 +65,26 @@ export default function ReactionTest() {
         setMode('end')
     }
 
+    function loseGame() {
+        setMode('lost')
+    }
+
+    function newGame() {
+        setRoundNum(1)
+        setPress(false)
+        setScores([])
+        setIsEarly(0)
+        setMode('game')
+    }
+
+
     return (
         <div className="reactionTest">
                 <h2 className="center">Reaction Test</h2>
-                {mode === 'start' && <button className="startbtn" onClick={startGame}>Start Game</button>}
+                {mode === 'start' && <div>
+                    <p className="rules">There will be 5 rounds. Click the button as fast as you can once prompted to. 2 early clicks and you Lose.</p>
+                    <button className="startbtn" onClick={startGame}>Start Game</button>
+                    </div>}
 
                 {mode === 'game' && <div>
                     <h3>Round {roundNum}/5</h3>
@@ -80,6 +113,11 @@ export default function ReactionTest() {
                             (scores[0] + scores[1] + scores[2] + scores[3] + scores[4])/5
                         }</h3>
                     </div>}
+
+                    {mode === 'lost' && <div>
+                        <h3>You Clicked to early</h3>
+                        <button className="nextRound" onClick={newGame}>Try Again</button>
+                        </div>}
         </div>
     )
 }
