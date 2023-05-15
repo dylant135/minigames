@@ -43,9 +43,13 @@ export default function DisplayNum({ setStage } : displayProps) {
         }, 2000 + time)
     }, [number, roundNum, setStage])
 
+
     return (
         <div className="displayNum">
             <h2 className="center">{number}</h2>
+            <div className="timeBar" >
+                <div></div>
+            </div>
         </div>
     )
 }

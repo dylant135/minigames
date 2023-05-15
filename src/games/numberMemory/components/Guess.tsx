@@ -32,7 +32,7 @@ export default function Guess({ setStage }: GuessProps) {
                     placeholder='Number'
                     className="guessInput"
                 />
-                <button className='gamebtn'>Submit Guess</button>
+                <button className='nextRound'>Submit Guess</button>
             </form>
         </div>
     )

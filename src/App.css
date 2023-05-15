@@ -81,7 +81,7 @@ nav > * {
 }
 
 .guessInput {
-  font-size: 1.3em;
+  font-size: 1.2em;
   padding: 4px;
 }
 
@@ -110,4 +110,18 @@ nav > * {
 .mDown {
   margin-bottom: 75px;
   font-size: 1.2em;
+}
+
+.timeBar {
+  width: 90%;
+  margin: 10px auto;
+  height: 22px;
+  border: 2px solid gray;
+}
+
+.timeBar > div {
+  height: 22px;
+  width: 100%;
+  background-color: #5014dc;
+  transition: width 3s linear;
 }
