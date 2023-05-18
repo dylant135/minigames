@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export default function GameList() {
     //enter new games here
-    const list = useRef<string[]>(['numbermemory', 'reactiontest'])
+    const list = useRef<string[]>(['numbermemory', 'reactiontest', 'patternmemory'])
 
     const displayList = list.current.map(l => {
         return (
