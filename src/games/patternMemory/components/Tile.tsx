@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
+import patternContext from "../patternContext";
 
 type TileProps = {
-    isOn: boolean
+    isOn: boolean,
+    id: number,
 }
 
-export default function Tile({isOn}: TileProps) {
-    console.log(isOn)
+export default function Tile({isOn, id }: TileProps) {
+    const { guessData, setGuessData } = useContext(patternContext)
+ 
+    function handleClick() {
+        let theTile = []
+        for(let i = 0; i < guessData.length; i++) {
+            const filtered = guessData[i].filter(x => x.id === id)
+            if(filtered.length === 1) {
+                theTile.push(filtered)
+            } else {
+                console.log('hmm', filtered)
+            }
+        }
 
-    function handleClick(event: React.MouseEvent<HTMLDivElement>) {
-        const e = event.target
-        console.log(e)
+        
+        setGuessData(prevState => {
+            return (
+                ...prevstate,
+
+            )
+        })
     }
 
     return (

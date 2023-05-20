@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Tile from "./Tile";
+import { time } from "console";
 
 type BoardProps = {
     boardData: {isOn: boolean, id: number}[][],
@@ -7,22 +8,32 @@ type BoardProps = {
     setBoardData: React.Dispatch<React.SetStateAction<{
         isOn: boolean;
         id: number;
-    }[][]>>
+    }[][]>>,
+    setMode: React.Dispatch<React.SetStateAction<string>>,
+    mode: string
 }
 
-export default function Board({boardData, setBoardData, round}: BoardProps) {
+export default function Board({boardData, setBoardData, round, setMode, mode}: BoardProps) {
     const displayBoard = boardData.map(t => {
         const row = t.map(x => {
             return (
-                <Tile isOn={x.isOn} />
+                <Tile isOn={x.isOn} id={x.id} />
             )
         })
         return row
     })
 
     useEffect(() => {
+        if(mode !== 'game') return
         generateBoard()
-    }, [round])
+        const timeout = setTimeout(() => {
+            setMode('guess')
+        }, 5000)
+
+        return function () {
+            clearTimeout(timeout)
+        }
+    }, [mode])
 
     function generateBoard() {
         let index = 0
