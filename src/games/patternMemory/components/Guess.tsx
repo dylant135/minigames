@@ -19,9 +19,9 @@ export default function Guess({ mode, setMode }: GuessProps) {
     function generateBoard() {
         let index = 0
         let arr: {isOn: boolean, id: number}[][] = []
-        for(let i = 0; i < 7; i++) {
+        for(let i = 0; i < 6; i++) {
             let a: {isOn: boolean, id: number}[] = []
-            for(let j = 0; j < 7; j++) {
+            for(let j = 0; j < 6; j++) {
                 a.push({isOn: false, id: index})
                 index++
             }
@@ -41,8 +41,11 @@ export default function Guess({ mode, setMode }: GuessProps) {
     })
 
     return (
-        <div className="board">
-            {displayBoard}
+        <div className="container">
+            <div className="board">
+                {displayBoard}
+            </div>
+            <button className="startbtn" onClick={() => setMode('check')}>Submit Guess</button>
         </div>
     )
 }

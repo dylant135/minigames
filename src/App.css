@@ -11,6 +11,12 @@ body {
   text-align: center;
 }
 
+.container {
+  width: 100vw;
+  margin: auto;
+  text-align: center;
+}
+
 nav {
   background-color: #870c25;
   width: 100vw;
@@ -130,8 +136,8 @@ nav > * {
   width: fit-content;
   margin: 10px auto;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(7, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
 }
 
 .tile {

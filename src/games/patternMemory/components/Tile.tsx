@@ -10,7 +10,7 @@ export default function Tile({isOn, id }: TileProps) {
     const { guessData, setGuessData } = useContext(patternContext)
  
     function handleClick() {
-        let theTile = []
+       /* let theTile = []
         for(let i = 0; i < guessData.length; i++) {
             const filtered = guessData[i].filter(x => x.id === id)
             if(filtered.length === 1) {
@@ -18,15 +18,26 @@ export default function Tile({isOn, id }: TileProps) {
             } else {
                 console.log('hmm', filtered)
             }
-        }
+        }*/
+        const newArr = guessData.map(r => {
+            let filtered = r.filter(x => x.id === id)
+
+            if(filtered.length === 1) {
+                filtered[0].isOn = !filtered[0].isOn
+                const newRow = r.map(x => {
+                    if(x.id === filtered[0].id) {
+                        return filtered[0]
+                    }
+                    return x
+                }) 
+                return newRow
+            } else {
+                return r
+            }
+        })
 
         
-        setGuessData(prevState => {
-            return (
-                ...prevstate,
-
-            )
-        })
+        setGuessData(newArr)
     }
 
     return (
