@@ -40,7 +40,7 @@ export default function Board({ round, setMode, mode}: BoardProps) {
             for(let j = 0; j < 6; j++) {
                 const ranNum = Math.random() * 10
                 let isOn = false
-                if(ranNum > 6.5) {
+                if(ranNum > 7) {
                     isOn = true
                 }
                 n.push({
@@ -51,7 +51,6 @@ export default function Board({ round, setMode, mode}: BoardProps) {
             }
             arr.push(n)
         }
-        console.log(arr)
         setBoardData(arr)
     }
 

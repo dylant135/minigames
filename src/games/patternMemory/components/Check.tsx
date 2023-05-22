@@ -10,14 +10,15 @@ type checkProps = {
 }
 
 export default function Check({round, setRound, mode, setMode}: checkProps) {
-    const { guessData, boardData} = useContext(patternContext)
+    const { guessData, setGuessData, boardData, setBoardData} = useContext(patternContext)
     const [isCorrect, setIsCorrect] = useState('')
     const [mistakes, setMistakes] = useState<{isOn: boolean, id: number}[]>([])
 
     useEffect(() => {
         if(mode !== 'check') return
+        if(isCorrect !== '') return
         checkGuess()
-    }, [round, mode])
+    }, [round, mode, isCorrect])
     
     function checkGuess() {
         const wrong: {isOn: boolean, id: number}[] = []
@@ -28,7 +29,6 @@ export default function Check({round, setRound, mode, setMode}: checkProps) {
                 }
            }
         }
-
         if(wrong.length >= 1) {
             setMistakes(wrong)
             incorrect(wrong)
@@ -42,7 +42,12 @@ export default function Check({round, setRound, mode, setMode}: checkProps) {
     }
 
     function correct() {
+        if(isCorrect === 'correct') return
         setIsCorrect('correct')
+        setRound(prevState => {
+            console.log(prevState)
+            return prevState + 1
+        })
     }
 
     const displayBoard = boardData.map(r => {
@@ -59,10 +64,19 @@ export default function Check({round, setRound, mode, setMode}: checkProps) {
         return row
     })
 
+    function nextRound() {
+        setIsCorrect('')
+        setMistakes([])
+        setGuessData([])
+        setBoardData([])
+        setMode('start')
+    }
+
     return (
         <div className="check">
             {isCorrect === 'correct' && <div>
                 <h2 className="center">Correct!</h2>
+                <button onClick={nextRound} className="nextRound">Next Round</button>
                 <div className="board">
                     {displayBoard}
                 </div>

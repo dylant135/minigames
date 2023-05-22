@@ -6,7 +6,6 @@ import Check from "./components/Check";
 
 export default function PatternMemory() {
     const [mode, setMode] =  useState('start')
-    const [boardData, setBoardData] = useState<{isOn: boolean, id: number}[][]>([])
     const [round, setRound] = useState(1)
 
     function startGame() {
@@ -18,6 +17,8 @@ export default function PatternMemory() {
                 {mode === 'start' && <div className="container">
                     <button onClick={startGame} className="startbtn">Start Game</button>    
                 </div>}
+
+                {(mode === 'game' || 'guess' || 'check') && <h2 className="center">Score: {round - 1}</h2>}
 
                 {mode === 'game' && <Board round={round} setMode={setMode} mode={mode} />}
 
